@@ -195,4 +195,4 @@ Uma transportadora pode ser responsável por várias entregas.
 - Os nomes das tabelas e colunas seguem o padrão `snake_case`.
 - Identificadores utilizam `INTEGER`.
 - Datas utilizam `DATE`.
-- Valores numéricos relacionados a preços e pesos utilizam `REAL`.
+- Valores numéricos relacionados a preços e pesos utilizam `FLOAT`.
