@@ -7,10 +7,10 @@ SELECT sum(valor_total) as valor_total_dos_pedidos from pedidos;
 SELECT avg(valor_total) as valor_medio_pedidos from pedidos;
 
 
-SELECT * from pedidos ORDER by valor_total desc limit 1;
+select max(valor_total) as maior_valor from pedidos;
 
 
-SELECT * from pedidos ORDER by valor_total asc limit 1;
+select min(valor_total) as menor_valor from pedidos;
 
 
 select status, count(status) from pedidos group by status;
