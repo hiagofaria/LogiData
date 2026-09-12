@@ -10,8 +10,8 @@ O banco é composto por seis tabelas principais:
 2. `produtos`
 3. `pedidos`
 4. `itens_pedido`
-5. `entregas`
-6. `transportadoras`
+5. `transportadora`
+6. `entregas`
 
 ---
 
@@ -21,11 +21,11 @@ Armazena as informações dos clientes que realizam pedidos na LogiData.
 
 | Coluna | Tipo de dado | Chave | Nulo | Descrição |
 |---|---|---|---|---|
-| `id_cliente` | INTEGER | PK | Não | Identificador único do cliente |
-| `nome` | VARCHAR(150) | — | Não | Nome do cliente ou razão social |
-| `email` | VARCHAR(150) | — | Não | E-mail utilizado para contato |
+| `id_cliente` | INT | PK | Não | Identificador único do cliente |
+| `nome` | VARCHAR(100) | — | Não | Nome do cliente ou razão social |
+| `email` | VARCHAR(100) | — | Não | E-mail utilizado para contato |
 | `telefone` | VARCHAR(20) | — | Sim | Telefone de contato do cliente |
-| `tipo_cliente` | VARCHAR(20) | — | Não | Identifica se o cliente é pessoa física ou empresa |
+| `tipo_cliente` | VARCHAR(30) | — | Não | Identifica se o cliente é pessoa física ou empresa |
 | `cidade` | VARCHAR(100) | — | Não | Cidade onde o cliente está localizado |
 | `estado` | VARCHAR(2) | — | Não | Estado onde o cliente está localizado |
 
@@ -33,15 +33,15 @@ Armazena as informações dos clientes que realizam pedidos na LogiData.
 
 # 2. Tabela: `produtos`
 
-Armazena os produtos transportados pela LogiData.
+Armazena os produtos disponibilizados pela LogiData.
 
 | Coluna | Tipo de dado | Chave | Nulo | Descrição |
 |---|---|---|---|---|
-| `id_produto` | INTEGER | PK | Não | Identificador único do produto |
-| `nome` | VARCHAR(150) | — | Não | Nome do produto |
-| `categoria` | VARCHAR(100) | — | Não | Categoria à qual o produto pertence |
-| `preco` | REAL | — | Não | Preço do produto |
-| `peso_kg` | REAL | — | Não | Peso do produto em quilogramas |
+| `id_produto` | INT | PK | Não | Identificador único do produto |
+| `nome` | VARCHAR(250) | — | Não | Nome do produto |
+| `categoria` | VARCHAR(250) | — | Não | Categoria à qual o produto pertence |
+| `preco` | FLOAT | — | Não | Preço do produto |
+| `peso_kg` | FLOAT | — | Não | Peso do produto em quilogramas |
 
 ---
 
@@ -51,11 +51,11 @@ Armazena os pedidos realizados pelos clientes.
 
 | Coluna | Tipo de dado | Chave | Nulo | Descrição |
 |---|---|---|---|---|
-| `id_pedido` | INTEGER | PK | Não | Identificador único do pedido |
-| `cliente_id` | INTEGER | FK | Não | Identificador do cliente que realizou o pedido |
+| `id_pedido` | INT | PK | Não | Identificador único do pedido |
+| `cliente_id` | INT | FK | Sim | Identificador do cliente que realizou o pedido |
 | `data_pedido` | DATE | — | Não | Data em que o pedido foi realizado |
 | `status` | VARCHAR(30) | — | Não | Situação atual do pedido |
-| `valor_total` | REAL | — | Não | Valor total do pedido |
+| `valor_total` | FLOAT | — | Não | Valor total do pedido |
 
 ### Chave estrangeira
 
@@ -65,15 +65,15 @@ Armazena os pedidos realizados pelos clientes.
 
 # 4. Tabela: `itens_pedido`
 
-Relaciona os pedidos aos produtos e registra a quantidade de cada produto presente em um pedido.
+Relaciona os pedidos aos produtos e registra as informações de cada produto presente em um pedido.
 
 | Coluna | Tipo de dado | Chave | Nulo | Descrição |
 |---|---|---|---|---|
-| `id_item` | INTEGER | PK | Não | Identificador único do item |
-| `pedido_id` | INTEGER | FK | Não | Identificador do pedido |
-| `produto_id` | INTEGER | FK | Não | Identificador do produto |
-| `quantidade` | INTEGER | — | Não | Quantidade do produto no pedido |
-| `preco_unitario` | REAL | — | Não | Preço do produto no momento do pedido |
+| `id_item` | INT | PK | Não | Identificador único do item |
+| `pedido_id` | INT | FK | Sim | Identificador do pedido |
+| `produto_id` | INT | FK | Sim | Identificador do produto |
+| `quantidade` | INT | — | Não | Quantidade do produto no pedido |
+| `preco_unitario` | FLOAT | — | Não | Preço do produto no momento do pedido |
 
 ### Chaves estrangeiras
 
@@ -82,42 +82,42 @@ Relaciona os pedidos aos produtos e registra a quantidade de cada produto presen
 
 ---
 
-# 5. Tabela: `entregas`
+# 5. Tabela: `transportadora`
+
+Armazena as informações das empresas responsáveis pelo transporte dos pedidos.
+
+| Coluna | Tipo de dado | Chave | Nulo | Descrição |
+|---|---|---|---|---|
+| `id_transportadora` | INT | PK | Não | Identificador único da transportadora |
+| `nome` | VARCHAR(250) | — | Não | Nome da transportadora |
+| `telefone` | VARCHAR(150) | — | Não | Telefone de contato da transportadora |
+| `email` | VARCHAR(150) | — | Não | E-mail de contato da transportadora |
+| `cidade` | VARCHAR(250) | — | Não | Cidade onde a transportadora está localizada |
+| `estado` | VARCHAR(250) | — | Não | Estado onde a transportadora está localizada |
+
+---
+
+# 6. Tabela: `entregas`
 
 Armazena as informações relacionadas ao transporte e à entrega dos pedidos.
 
 | Coluna | Tipo de dado | Chave | Nulo | Descrição |
 |---|---|---|---|---|
-| `id_entrega` | INTEGER | PK | Não | Identificador único da entrega |
-| `pedido_id` | INTEGER | FK | Não | Identificador do pedido relacionado |
-| `transportadora_id` | INTEGER | FK | Não | Identificador da transportadora responsável |
-| `codigo_rastreio` | VARCHAR(30) | — | Não | Código utilizado para rastrear a entrega |
+| `id_entrega` | INT | PK | Não | Identificador único da entrega |
+| `pedido_id` | INT | FK | Sim | Identificador do pedido relacionado |
+| `transportadora_id` | INT | FK | Sim | Identificador da transportadora responsável |
+| `codigo_rastreio` | VARCHAR(90) | — | Não | Código utilizado para rastrear a entrega |
 | `data_envio` | DATE | — | Sim | Data em que o pedido foi enviado |
 | `data_prevista` | DATE | — | Não | Data prevista para a entrega |
 | `data_entrega` | DATE | — | Sim | Data em que o pedido foi efetivamente entregue |
 | `status` | VARCHAR(30) | — | Não | Situação atual da entrega |
 | `cidade_destino` | VARCHAR(100) | — | Não | Cidade de destino da entrega |
-| `estado_destino` | VARCHAR(2) | — | Não | Estado de destino da entrega |
+| `estado_destino` | VARCHAR(100) | — | Não | Estado de destino da entrega |
 
 ### Chaves estrangeiras
 
 - `pedido_id` → `pedidos.id_pedido`
-- `transportadora_id` → `transportadoras.id_transportadora`
-
----
-
-# 6. Tabela: `transportadoras`
-
-Armazena as informações das empresas responsáveis pelas entregas.
-
-| Coluna | Tipo de dado | Chave | Nulo | Descrição |
-|---|---|---|---|---|
-| `id_transportadora` | INTEGER | PK | Não | Identificador único da transportadora |
-| `nome` | VARCHAR(150) | — | Não | Nome da transportadora |
-| `telefone` | VARCHAR(20) | — | Sim | Telefone de contato da transportadora |
-| `email` | VARCHAR(150) | — | Sim | E-mail de contato da transportadora |
-| `cidade` | VARCHAR(100) | — | Não | Cidade onde a transportadora está localizada |
-| `estado` | VARCHAR(2) | — | Não | Estado onde a transportadora está localizada |
+- `transportadora_id` → `transportadora.id_transportadora`
 
 ---
 
@@ -133,7 +133,7 @@ Um cliente pode realizar vários pedidos.
 
 ---
 
-## Pedidos → Itens do pedido
+## Pedidos → Itens dos pedidos
 
 Um pedido pode possuir vários itens.
 
@@ -143,7 +143,7 @@ Um pedido pode possuir vários itens.
 
 ---
 
-## Produtos → Itens do pedido
+## Produtos → Itens dos pedidos
 
 Um produto pode aparecer em vários itens de pedidos.
 
@@ -163,13 +163,13 @@ Um pedido pode possuir uma ou mais entregas.
 
 ---
 
-## Transportadoras → Entregas
+## Transportadora → Entregas
 
 Uma transportadora pode ser responsável por várias entregas.
 
 **Cardinalidade:** 1:N
 
-`transportadoras.id_transportadora` → `entregas.transportadora_id`
+`transportadora.id_transportadora` → `entregas.transportadora_id`
 
 ---
 
@@ -178,11 +178,11 @@ Uma transportadora pode ser responsável por várias entregas.
 | Tabela | Função |
 |---|---|
 | `clientes` | Armazena os clientes da LogiData |
-| `produtos` | Armazena os produtos transportados |
+| `produtos` | Armazena os produtos disponibilizados |
 | `pedidos` | Registra os pedidos realizados |
 | `itens_pedido` | Relaciona pedidos e produtos |
+| `transportadora` | Armazena as empresas responsáveis pelo transporte |
 | `entregas` | Registra o processo de entrega |
-| `transportadoras` | Armazena as empresas responsáveis pelo transporte |
 
 ---
 
@@ -193,6 +193,6 @@ Uma transportadora pode ser responsável por várias entregas.
 - `NOT NULL` representa um campo obrigatório.
 - `NULL` representa um campo que pode não possuir informação.
 - Os nomes das tabelas e colunas seguem o padrão `snake_case`.
-- Identificadores utilizam `INTEGER`.
+- Identificadores utilizam `INT`.
 - Datas utilizam `DATE`.
 - Valores numéricos relacionados a preços e pesos utilizam `FLOAT`.
