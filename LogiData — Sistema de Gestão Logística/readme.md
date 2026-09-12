@@ -16,19 +16,19 @@ O projeto foi desenvolvido como parte dos meus estudos em **Engenharia de Dados*
 
 O objetivo do LogiData é desenvolver uma estrutura de banco de dados capaz de representar uma operação logística e permitir a realização de consultas e análises sobre os dados gerados pela operação.
 
-O projeto busca aplicar conceitos de:
+O projeto aplica conceitos de:
 
-- Modelagem de dados;
-- Bancos de dados relacionais;
-- SQL;
-- SQLite;
-- Estruturação de tabelas;
-- Chaves e relacionamentos;
-- Integridade dos dados;
-- Manipulação de registros;
-- Consultas;
-- Análise de dados;
-- Resolução de perguntas de negócio.
+* Modelagem de dados;
+* Bancos de dados relacionais;
+* SQL;
+* SQLite;
+* Estruturação de tabelas;
+* Chaves e relacionamentos;
+* Integridade dos dados;
+* Manipulação de registros;
+* Consultas;
+* Análise de dados;
+* Resolução de perguntas de negócio.
 
 Para conhecer o contexto completo utilizado no projeto, consulte o [cenário da operação](docs/cenario.md).
 
@@ -44,38 +44,32 @@ O [cenário do projeto](docs/cenario.md) apresenta o contexto da empresa fictíc
 
 ### Regras de negócio
 
-As [regras de negócio](docs/regras-negocio.md) definem as condições e regras que o sistema deve respeitar, incluindo os relacionamentos entre as entidades.
+As [regras de negócio](docs/regras-negocio.md) definem as condições utilizadas para representar o funcionamento da operação e os relacionamentos entre as entidades.
 
 ### Dicionário de dados
 
-O [dicionário de dados](docs/dicionario-dados.md) apresenta detalhadamente as tabelas utilizadas no banco, seus campos, tipos de dados, chaves, restrições e relacionamentos.
+O [dicionário de dados](docs/dicionario-dados.md) apresenta as tabelas utilizadas no banco, seus campos, tipos de dados, chaves, restrições e relacionamentos.
 
 ### Perguntas de negócio
 
-As [perguntas de negócio](docs/perguntas-negocio.md) apresentam as questões que irão orientar o desenvolvimento das consultas SQL e das análises do projeto.
+As [perguntas de negócio](docs/perguntas-negocio.md) apresentam as questões utilizadas como base para o desenvolvimento das consultas SQL e das análises do projeto.
 
 ---
 
 ## Modelo do banco de dados
 
-O modelo visual representa a estrutura do banco de dados e os relacionamentos existentes entre suas tabelas.
+O modelo abaixo representa visualmente a estrutura do banco de dados e os relacionamentos existentes entre suas tabelas.
 
-![Modelo do Banco de Dados](docs/modelo-banco.png)
-
-O arquivo original do modelo também está disponível na pasta [docs](docs/).
-
----
-
-## Estrutura do banco
+![Modelo do banco de dados](docs/modelo-banco.png)
 
 O banco de dados é composto pelas seguintes entidades:
 
-- `clientes`
-- `produtos`
-- `pedidos`
-- `itens_pedido`
-- `transportadoras`
-- `entregas`
+* `clientes`
+* `produtos`
+* `pedidos`
+* `itens_pedido`
+* `transportadora`
+* `entregas`
 
 A descrição completa de cada tabela pode ser consultada no [dicionário de dados](docs/dicionario-dados.md).
 
@@ -85,107 +79,145 @@ A descrição completa de cada tabela pode ser consultada no [dicionário de dad
 
 O projeto utiliza dados fictícios desenvolvidos especificamente para representar diferentes situações de uma operação logística.
 
-A definição dos dados e dos cenários necessários para as consultas será baseada nas regras de negócio e nas perguntas definidas na documentação.
+A base possui:
 
-Os scripts responsáveis pela inserção dos dados estarão organizados em [sql/02_dados](sql/02_dados/).
+| Tabela           | Quantidade de registros |
+| ---------------- | ----------------------: |
+| `clientes`       |                      70 |
+| `produtos`       |                      30 |
+| `pedidos`        |                      70 |
+| `itens_pedido`   |                     180 |
+| `transportadora` |                       6 |
+| `entregas`       |                      85 |
 
-O banco de dados SQLite será armazenado em [database](database/).
+Os scripts responsáveis pela inserção dos dados estão organizados em [`sql/02_dados`](sql/02_dados).
+
+O banco de dados SQLite está armazenado em [`database`](database).
 
 ---
 
 ## Consultas SQL
 
-As consultas SQL serão desenvolvidas para explorar os dados e responder às perguntas de negócio definidas para o projeto.
+As consultas SQL foram desenvolvidas para explorar os dados e responder às perguntas de negócio definidas para o projeto.
 
-Os scripts de consulta estarão organizados em [sql/03_consultas](sql/03_consultas/).
+Os scripts estão organizados em [`sql/03_consultas`](sql/03_consultas), separados de acordo com as principais entidades do banco:
 
-As perguntas que orientam essas consultas estão disponíveis em [docs/perguntas-negocio.md](docs/perguntas-negocio.md).
+* Clientes;
+* Produtos;
+* Pedidos;
+* Itens dos pedidos;
+* Transportadoras;
+* Entregas.
+
+As perguntas que orientam essas consultas estão disponíveis em [`docs/perguntas-negocio.md`](docs/perguntas-negocio.md).
 
 ---
 
 ## Análises
 
-As análises serão desenvolvidas a partir dos resultados obtidos pelas consultas SQL.
+As análises integram informações de diferentes tabelas para obter uma visão mais abrangente da operação logística.
 
-Essa etapa terá como objetivo transformar os dados armazenados no banco em informações relevantes sobre a operação logística.
+Entre os pontos analisados estão:
 
-Os scripts relacionados às análises estarão organizados em [sql/04_analises](sql/04_analises/).
+* quantidade de pedidos e valor movimentado por cliente;
+* produtos associados aos pedidos de maior valor;
+* volume de entregas atrasadas por transportadora;
+* relação entre clientes e entregas por estado;
+* comparação entre pedidos e entregas por período;
+* movimentação financeira dos produtos;
+* clientes com pedidos em diferentes status;
+* transportadoras com entregas destinadas a diferentes estados.
+
+Os scripts relacionados às análises estão organizados em [`sql/04_analises`](sql/04_analises).
 
 ---
 
 ## Estruturação do banco
 
-Os scripts responsáveis pela criação e estruturação das tabelas estarão organizados em [sql/01_estrutura](sql/01_estrutura/).
+Os scripts responsáveis pela criação e estruturação das tabelas estão organizados em [`sql/01_estrutura`](sql/01_estrutura).
 
-Essa etapa implementará a estrutura definida no [dicionário de dados](docs/dicionario-dados.md).
+Essa etapa implementa a estrutura definida no [dicionário de dados](docs/dicionario-dados.md), incluindo tabelas, chaves primárias, chaves estrangeiras e relacionamentos.
 
 ---
 
 ## Tecnologias utilizadas
 
-- **SQL**
-- **SQLite**
+* **SQL**
+* **SQLite**
 
 ---
 
 ## Conceitos aplicados
 
-Durante o desenvolvimento do projeto serão aplicados conceitos relacionados a:
+Durante o desenvolvimento do projeto foram aplicados conceitos relacionados a:
 
-- Bancos de dados relacionais;
-- Modelagem de dados;
-- Criação e alteração de tabelas;
-- Tipos de dados;
-- Chaves primárias;
-- Chaves estrangeiras;
-- Relacionamentos;
-- Inserção e manipulação de dados;
-- Consultas SQL;
-- Filtros;
-- Ordenação;
-- Agrupamento;
-- Funções de agregação;
-- Funções de texto;
-- Funções de data;
-- Funções numéricas;
-- Conversão de tipos;
-- Expressões condicionais;
-- Tratamento de valores nulos;
-- Junções entre tabelas;
-- Subconsultas;
-- Views;
-- Triggers.
+* Bancos de dados relacionais;
+* Modelagem de dados;
+* Criação e alteração de tabelas;
+* Tipos de dados;
+* Chaves primárias;
+* Chaves estrangeiras;
+* Relacionamentos;
+* Inserção e manipulação de dados;
+* Consultas SQL;
+* Filtros;
+* Ordenação;
+* Agrupamento;
+* Funções de agregação;
+* Funções de texto;
+* Funções de data;
+* Funções numéricas;
+* Conversão de tipos;
+* Expressões condicionais;
+* Tratamento de valores nulos;
+* Junções entre tabelas;
+* Subconsultas.
 
 ---
 
 ## Estrutura do projeto
 
-A organização do repositório foi definida para separar a documentação, o banco de dados e os scripts SQL.
-
-    logidata/
-    │
+```text
+logidata/
+│
+├── README.md
+│
+├── docs/
+│   ├── README.md
+│   ├── cenario.md
+│   ├── regras-negocio.md
+│   ├── dicionario-dados.md
+│   ├── perguntas-negocio.md
+│   └── modelo-banco.png
+│
+├── database/
+│   ├── README.md
+│   └── logidata.db
+│
+└── sql/
     ├── README.md
     │
-    ├── docs/
-    │   ├── cenario.md
-    │   ├── regras-negocio.md
-    │   ├── dicionario-dados.md
-    │   ├── perguntas-negocio.md
-    │   └── modelo-banco.png
+    ├── 01_estrutura/
+    │   ├── README.md
+    │   └── criar_tabelas.sql
     │
-    ├── database/
-    │   └── logidata.db
+    ├── 02_dados/
+    │   ├── README.md
+    │   └── inserir_dados.sql
     │
-    └── sql/
+    ├── 03_consultas/
+    │   ├── README.md
+    │   ├── 01_clientes/
+    │   ├── 02_produtos/
+    │   ├── 03_pedidos/
+    │   ├── 04_itens_dos_pedidos/
+    │   ├── 05_transportadoras/
+    │   └── 06_entregas/
+    │
+    └── 04_analises/
         ├── README.md
-        │
-        ├── 01_estrutura/
-        │
-        ├── 02_dados/
-        │
-        ├── 03_consultas/
-        │
-        └── 04_analises/
+        └── analises.sql
+```
 
 ---
 
@@ -193,33 +225,33 @@ A organização do repositório foi definida para separar a documentação, o ba
 
 ### `docs/`
 
-A pasta [docs](docs/) contém a documentação responsável por explicar o contexto, as regras, a modelagem e as perguntas que orientam o projeto.
+A pasta [`docs`](docs) contém a documentação responsável por explicar o contexto, as regras, a modelagem e as perguntas que orientam o projeto.
 
 ### `database/`
 
-A pasta [database](database/) contém o banco de dados SQLite utilizado pelo projeto.
+A pasta [`database`](database) contém o banco de dados SQLite utilizado pelo projeto.
 
 ### `sql/`
 
-A pasta [sql](sql/) contém os scripts SQL utilizados durante o desenvolvimento.
+A pasta [`sql`](sql) contém os scripts SQL utilizados para criar a estrutura do banco, inserir os dados, realizar consultas e desenvolver análises.
 
 A organização interna dessa pasta está documentada no [README da pasta SQL](sql/README.md).
 
 ### `sql/01_estrutura/`
 
-A pasta [sql/01_estrutura](sql/01_estrutura/) contém os scripts relacionados à criação e estruturação do banco.
+A pasta [`sql/01_estrutura`](sql/01_estrutura) contém o script relacionado à criação e estruturação do banco.
 
 ### `sql/02_dados/`
 
-A pasta [sql/02_dados](sql/02_dados/) contém os scripts relacionados à inserção e manipulação dos dados.
+A pasta [`sql/02_dados`](sql/02_dados) contém o script responsável pela inserção dos dados fictícios utilizados no projeto.
 
 ### `sql/03_consultas/`
 
-A pasta [sql/03_consultas](sql/03_consultas/) contém os scripts utilizados para realizar consultas e responder às perguntas de negócio.
+A pasta [`sql/03_consultas`](sql/03_consultas) contém os scripts utilizados para realizar consultas e responder às perguntas de negócio.
 
 ### `sql/04_analises/`
 
-A pasta [sql/04_analises](sql/04_analises/) contém os scripts utilizados para desenvolver análises a partir dos dados obtidos pelas consultas.
+A pasta [`sql/04_analises`](sql/04_analises) contém o script utilizado para desenvolver análises integradas a partir dos dados do banco.
 
 ---
 
@@ -227,46 +259,48 @@ A pasta [sql/04_analises](sql/04_analises/) contém os scripts utilizados para d
 
 O projeto segue uma sequência lógica de desenvolvimento:
 
-    Cenário
-       ↓
-    Regras de negócio
-       ↓
-    Dicionário de dados
-       ↓
-    Perguntas de negócio
-       ↓
-    Modelo do banco
-       ↓
-    Estruturação do banco
-       ↓
-    Inserção dos dados
-       ↓
-    Consultas SQL
-       ↓
-    Análises
+```text
+Cenário
+   ↓
+Regras de negócio
+   ↓
+Dicionário de dados
+   ↓
+Perguntas de negócio
+   ↓
+Modelo do banco
+   ↓
+Estruturação do banco
+   ↓
+Inserção dos dados
+   ↓
+Consultas SQL
+   ↓
+Análises
+```
 
-Cada etapa é desenvolvida com base nas definições estabelecidas nas etapas anteriores.
+Cada etapa foi desenvolvida com base nas definições estabelecidas nas etapas anteriores.
 
 ---
 
 ## Documentação rápida
 
-| Documento | Descrição |
-|---|---|
-| [Cenário](docs/cenario.md) | Contexto e funcionamento da operação logística |
-| [Regras de negócio](docs/regras-negocio.md) | Regras utilizadas pelo sistema |
-| [Dicionário de dados](docs/dicionario-dados.md) | Estrutura detalhada das tabelas |
-| [Perguntas de negócio](docs/perguntas-negocio.md) | Perguntas que orientam as consultas |
-| [Modelo do banco](docs/modelo-banco.png) | Representação visual do banco |
-| [Organização SQL](sql/README.md) | Organização dos scripts SQL |
+| Documento                                         | Descrição                                      |
+| ------------------------------------------------- | ---------------------------------------------- |
+| [Cenário](docs/cenario.md)                        | Contexto e funcionamento da operação logística |
+| [Regras de negócio](docs/regras-negocio.md)       | Regras utilizadas pelo sistema                 |
+| [Dicionário de dados](docs/dicionario-dados.md)   | Estrutura detalhada das tabelas                |
+| [Perguntas de negócio](docs/perguntas-negocio.md) | Perguntas que orientam as consultas            |
+| [Modelo do banco](docs/modelo-banco.png)          | Representação visual do banco                  |
+| [Organização SQL](sql/README.md)                  | Organização dos scripts SQL                    |
 
 ---
 
 ## Status do projeto
 
-**Em desenvolvimento.**
+**Concluído.**
 
-O projeto será desenvolvido progressivamente, passando pelas etapas de documentação, modelagem, criação do banco, inserção dos dados, desenvolvimento das consultas e realização das análises.
+O projeto foi desenvolvido passando pelas etapas de documentação, modelagem, criação do banco, inserção dos dados, desenvolvimento das consultas e realização das análises.
 
 ---
 
@@ -274,4 +308,4 @@ O projeto será desenvolvido progressivamente, passando pelas etapas de document
 
 Este projeto foi desenvolvido como parte da minha formação em **Engenharia de Dados**, com foco no desenvolvimento de habilidades práticas em **SQL, SQLite e bancos de dados relacionais**.
 
-A proposta é representar um cenário de negócio, estruturar seus dados e utilizar SQL para consultar e analisar informações relacionadas a uma operação de gestão logística.
+A proposta foi representar um cenário de negócio, estruturar seus dados e utilizar SQL para consultar e analisar informações relacionadas a uma operação de gestão logística.
