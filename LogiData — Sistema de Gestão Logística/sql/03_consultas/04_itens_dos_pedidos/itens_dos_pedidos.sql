@@ -1,11 +1,13 @@
-SELECT produto_id, SUM(quantidade) AS qtd_total_unidades FROM itens_pedido GROUP BY produto_id;
+select produto_id, sum(quantidade) as qtd_total_unidades from itens_pedido group by produto_id;
 
-SELECT produto_id, COUNT(DISTINCT pedido_id) AS qtd_pedidos FROM itens_pedido GROUP BY produto_id ORDER BY qtd_pedidos DESC;
+select produto_id, count(distinct pedido_id) as qtd_pedidos from itens_pedido group by produto_id order by qtd_pedidos desc;
 
-SELECT produto_id, SUM(quantidade) AS qtd_unidades FROM itens_pedido GROUP BY produto_id ORDER BY qtd_unidades DESC;
+select produto_id, sum(quantidade) as qtd_unidades from itens_pedido group by produto_id order by qtd_unidades desc;
 
-SELECT pedido_id, SUM(quantidade) AS qtd_itens FROM itens_pedido GROUP BY pedido_id ORDER BY qtd_itens DESC;
+select produto_id, sum(quantidade * preco_unitario) as valor_total from itens_pedido group by produto_id order by valor_total desc;
 
-SELECT SUM(quantidade * preco_unitario) AS valor_total_itens FROM itens_pedido;
+select pedido_id, sum(quantidade) as qtd_itens from itens_pedido group by pedido_id order by qtd_itens desc;
 
-SELECT AVG(quantidade) AS quantidade_media_produtos FROM itens_pedido;
+select sum(quantidade * preco_unitario) as valor_total_itens from itens_pedido;
+
+select avg(qtd_produtos) as quantidade_media_produtos_por_pedido from (select pedido_id, sum(quantidade) as qtd_produtos from itens_pedido group by pedido_id);
