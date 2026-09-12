@@ -24,7 +24,7 @@ left join entregas e on p.id_pedido = e.pedido_id
 group by c.estado
 order by qtd_clientes desc, qtd_entregas desc;
 
-select periodo, qtd_pedidos, qtd_entregas
+select pedidos_periodo.periodo, qtd_pedidos, qtd_entregas
 from (
     select strftime('%Y-%m', data_pedido) as periodo, count(id_pedido) as qtd_pedidos
     from pedidos
