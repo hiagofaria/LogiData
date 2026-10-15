@@ -4,50 +4,47 @@
 
 O **LogiData** é um projeto de banco de dados relacional desenvolvido como parte dos meus estudos em **Engenharia de Dados**.
 
-O projeto simula uma operação de gestão logística, envolvendo clientes, produtos, pedidos, itens de pedidos, transportadoras e entregas.
+O projeto representa uma operação de gestão logística, envolvendo clientes, produtos, pedidos, itens de pedidos, transportadoras e entregas.
 
-A solução utiliza **SQL e SQLite** para estruturar, armazenar, consultar e analisar dados a partir de um cenário de negócio.
+Utilizando **SQL e SQLite**, o projeto tem como foco a modelagem e a estruturação de um banco de dados relacional do tipo **OLTP**, aplicando conceitos de tabelas, chaves, relacionamentos e integridade dos dados.
 
 ---
 
 ## Objetivo
 
-O objetivo do projeto é aplicar na prática conceitos relacionados a:
+O objetivo do projeto é construir uma estrutura de banco de dados capaz de representar as entidades e os relacionamentos de uma operação logística.
 
-- Bancos de dados relacionais;
+Durante o desenvolvimento, foram aplicados conceitos de:
+
 - Modelagem de dados;
-- SQL;
-- SQLite;
-- Estruturação de tabelas;
+- Bancos de dados relacionais;
+- SQL e SQLite;
+- Criação e estruturação de tabelas;
 - Chaves primárias e estrangeiras;
-- Relacionamentos;
+- Relacionamentos entre tabelas;
 - Integridade dos dados;
-- Consultas SQL;
-- Análise de dados;
-- Perguntas de negócio.
+- Inserção e manipulação de registros;
+- Documentação de bancos de dados.
 
 ---
 
-## O projeto
+## Etapas do projeto
 
-O desenvolvimento do LogiData passou pelas seguintes etapas:
+O desenvolvimento do LogiData envolveu as seguintes etapas:
 
-1. Definição do cenário;
-2. Definição das regras de negócio;
-3. Criação do dicionário de dados;
-4. Definição das perguntas de negócio;
-5. Modelagem do banco;
-6. Criação das tabelas;
-7. Inserção dos dados;
-8. Desenvolvimento das consultas SQL;
-9. Desenvolvimento das análises;
-10. Documentação do projeto.
+1. Definição do cenário da operação logística;
+2. Estabelecimento das regras de negócio;
+3. Elaboração do dicionário de dados;
+4. Modelagem do banco de dados;
+5. Criação das tabelas e dos relacionamentos;
+6. Inserção de dados fictícios;
+7. Documentação da estrutura do banco.
 
 ---
 
 ## Modelo do banco de dados
 
-Abaixo está o modelo visual utilizado para representar as tabelas e seus relacionamentos:
+O modelo abaixo representa as tabelas e os relacionamentos definidos para o banco de dados.
 
 ![Modelo do banco de dados](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/modelo-banco.png)
 
@@ -55,45 +52,14 @@ Abaixo está o modelo visual utilizado para representar as tabelas e seus relaci
 
 ## Estrutura do projeto
 
-O projeto completo está organizado dentro da pasta:
+O projeto está organizado na pasta [`LogiData — Sistema de Gestão Logística`](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica).
 
-[`LogiData — Sistema de Gestão Logística`](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica)
+Seus principais diretórios são:
 
-Dentro dela estão:
-
-- `docs/` — documentação do projeto;
-- `database/` — banco de dados SQLite;
-- `sql/` — scripts de estrutura, dados, consultas e análises.
-
----
-
-## Dados
-
-A base utiliza dados fictícios criados especificamente para representar a operação logística.
-
-| Tabela | Registros |
-|---|---:|
-| `clientes` | 70 |
-| `produtos` | 30 |
-| `pedidos` | 70 |
-| `itens_pedido` | 180 |
-| `transportadora` | 6 |
-| `entregas` | 85 |
-
----
-
-## Consultas e análises
-
-O projeto possui consultas SQL organizadas por entidade:
-
-- Clientes;
-- Produtos;
-- Pedidos;
-- Itens dos pedidos;
-- Transportadoras;
-- Entregas.
-
-Também foram desenvolvidas análises integradas envolvendo diferentes entidades do banco.
+- `docs/` — documentação do cenário, regras de negócio, dicionário de dados e modelo do banco;
+- `database/` — banco de dados SQLite (`logidata.db`);
+- `sql/01_estrutura/` — script de criação das tabelas;
+- `sql/02_dados/` — script de inserção dos dados fictícios.
 
 ---
 
@@ -106,16 +72,12 @@ Também foram desenvolvidas análises integradas envolvendo diferentes entidades
 
 ## Documentação
 
-A documentação completa está disponível dentro da pasta do projeto:
+A documentação estrutural do projeto está disponível na pasta [`docs/`](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs).
 
-[`Documentação do LogiData`](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs)
-
-Nela estão disponíveis:
-
-- [Cenário](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/cenario.md)
+- [Cenário do projeto](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/cenario.md)
 - [Regras de negócio](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/regras-negocio.md)
 - [Dicionário de dados](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/dicionario-dados.md)
-- [Perguntas de negócio](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/perguntas-negocio.md)
+- [Modelo do banco de dados](./LogiData%20%E2%80%94%20Sistema%20de%20Gest%C3%A3o%20Log%C3%ADstica/docs/modelo-banco.png)
 
 ---
 
@@ -123,4 +85,8 @@ Nela estão disponíveis:
 
 **Concluído.**
 
-O projeto foi desenvolvido desde a definição do cenário até a estruturação do banco, inserção dos dados, consultas, análises e documentação.
+O projeto contempla a modelagem, a criação e a estruturação de um banco de dados relacional, além da inserção de dados fictícios e da documentação correspondente.
+
+---
+
+Projeto desenvolvido como parte dos meus estudos em **Engenharia de Dados**, com foco em SQL, SQLite e bancos de dados relacionais.
